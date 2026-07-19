@@ -1,0 +1,291 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Emergency.css — Emergency Vehicle Management
+   Pulsing alerts · service finder · map & list layout
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Emergency stats row ─────────────────────────────────────────────────── */
+.emg-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.emg-stat-card {
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xl);
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  box-shadow: var(--shadow), var(--shadow-inset);
+  transition: var(--transition-slow);
+  text-align: center;
+}
+.emg-stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+.emg-stat-icon { font-size: 1.8rem; line-height: 1; }
+.emg-stat-val {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.05em;
+  color: var(--text-primary);
+  animation: countUp .5s cubic-bezier(.22,1,.36,1);
+}
+.emg-stat-label {
+  font-size: .72rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+/* ── Emergency location cards grid ──────────────────────────────────────── */
+.emergency-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+/* Individual location card */
+.emergency-location-card {
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xl);
+  padding: 20px;
+  box-shadow: var(--shadow), var(--shadow-inset);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: var(--transition-slow);
+  animation: slideUp .35s cubic-bezier(.22,1,.36,1) both;
+}
+.emergency-location-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+/* Active emergency card — red pulse border */
+.active-emergency {
+  border-color: rgba(239,68,68,0.35) !important;
+  box-shadow: var(--shadow), 0 0 0 2px rgba(239,68,68,0.12) !important;
+  animation: slideUp .35s cubic-bezier(.22,1,.36,1), badgePulse 2s ease-in-out infinite;
+}
+
+/* Top section */
+.elc-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.elc-info { flex: 1; min-width: 0; }
+.elc-name {
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Signal status indicator */
+.elc-signal {
+  font-size: .78rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.elc-signal.green         { background: rgba(34,197,94,0.12); color: #16a34a; border: 1px solid rgba(34,197,94,0.25); }
+.elc-signal.red           { background: rgba(239,68,68,0.12);  color: #dc2626; border: 1px solid rgba(239,68,68,0.25); }
+.elc-signal.yellow        { background: rgba(245,158,11,0.12); color: #d97706; border: 1px solid rgba(245,158,11,0.25); }
+.elc-signal.emergency-green {
+  background: rgba(239,68,68,0.12);
+  color: #dc2626;
+  border: 1px solid rgba(239,68,68,0.35);
+  animation: badgePulse 1.5s ease-in-out infinite;
+}
+
+/* Details grid */
+.elc-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.elc-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 10px;
+  background: rgba(37,99,235,0.04);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+.elc-detail span { font-size: .68rem; color: var(--text-muted); font-weight: 500; }
+.elc-detail strong { font-size: .84rem; color: var(--text-primary); font-weight: 700; }
+
+/* Animated clearance bar */
+.elc-clearance-bar {
+  height: 4px;
+  background: rgba(239,68,68,0.12);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.clearance-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+  border-radius: var(--radius-full);
+  width: 65%;
+  animation: clearancePulse 2s ease-in-out infinite;
+}
+@keyframes clearancePulse { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
+
+/* ── Info box ────────────────────────────────────────────────────────────── */
+.emg-info-box {
+  background: var(--info-light);
+  border: 1px solid rgba(37,99,235,0.2);
+  border-radius: var(--radius-xl);
+  padding: 20px 24px;
+  margin-top: 22px;
+}
+.emg-info-box h4 {
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.emg-info-box ul { display: flex; flex-direction: column; gap: 8px; }
+.emg-info-box li {
+  font-size: .84rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  padding-left: 4px;
+}
+
+/* ── Nearby services ─────────────────────────────────────────────────────── */
+.emg-nearby {
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xl);
+  padding: 22px;
+  margin-top: 22px;
+  box-shadow: var(--shadow), var(--shadow-inset);
+}
+
+.emg-nearby-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+/* Service summary cards */
+.emg-svc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.emg-svc-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  text-align: center;
+  transition: var(--transition);
+}
+.emg-svc-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+
+.emg-svc-icon  { font-size: 1.5rem; }
+.emg-svc-count {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -.04em;
+  animation: countUp .5s both;
+}
+.emg-svc-label { font-size: .7rem; color: var(--text-muted); font-weight: 500; }
+
+/* Map + list layout */
+.emg-svc-layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 16px;
+  height: 380px;
+}
+
+.emg-svc-map {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.emg-svc-list {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  scrollbar-width: thin;
+}
+
+.emg-svc-section { display: flex; flex-direction: column; gap: 6px; }
+.emg-svc-section-title {
+  font-size: .78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--border);
+}
+
+.emg-svc-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  transition: var(--transition);
+}
+.emg-svc-item:hover { background: var(--accent-light); border-color: var(--accent); }
+.emg-svc-item-name  { flex: 1; font-size: .82rem; font-weight: 600; color: var(--text-primary); }
+.emg-svc-item-phone { font-size: .75rem; color: var(--text-muted); white-space: nowrap; }
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .emg-svc-layout { grid-template-columns: 1fr; height: auto; }
+  .emg-svc-map { height: 300px; }
+  .emg-svc-list { max-height: 260px; }
+  .emg-svc-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .emg-stats { grid-template-columns: 1fr 1fr; }
+  .elc-details { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .emg-stats { grid-template-columns: 1fr; }
+  .emergency-cards { grid-template-columns: 1fr; }
+}

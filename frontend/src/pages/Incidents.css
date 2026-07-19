@@ -1,0 +1,119 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Incidents.css — Incident Tracker
+   Premium table layout · severity colors · action buttons
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Summary strip ───────────────────────────────────────────────────────── */
+.inc-summary {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.inc-stat {
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xl);
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  box-shadow: var(--shadow), var(--shadow-inset);
+  transition: var(--transition-slow);
+  text-align: center;
+}
+.inc-stat:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+.inc-stat-value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.05em;
+  animation: countUp .5s cubic-bezier(.22,1,.36,1);
+}
+.inc-stat-label {
+  font-size: .72rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+/* ── Type cell in table ──────────────────────────────────────────────────── */
+.inc-type-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.inc-type-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* ── Severity badge ──────────────────────────────────────────────────────── */
+.inc-severity-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+
+/* ── Status select ───────────────────────────────────────────────────────── */
+.inc-status-select {
+  background: var(--bg-input);
+  border: 1.5px solid var(--border-solid);
+  border-radius: var(--radius);
+  padding: 5px 10px;
+  font-size: .78rem;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  outline: none;
+  transition: var(--transition);
+}
+.inc-status-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,0.12); }
+
+/* ── Description cell ────────────────────────────────────────────────────── */
+.inc-desc {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Action buttons cluster ──────────────────────────────────────────────── */
+.action-btns {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+/* ── Critical row highlight ──────────────────────────────────────────────── */
+.row-emergency {
+  background: rgba(239,68,68,0.04) !important;
+}
+.row-emergency:hover { background: rgba(239,68,68,0.07) !important; }
+
+/* ── Filter select ───────────────────────────────────────────────────────── */
+.filter-select {
+  min-width: 130px;
+  flex-shrink: 0;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .inc-summary { grid-template-columns: repeat(2, 1fr); }
+  .inc-desc { max-width: 100px; }
+}
+@media (max-width: 480px) {
+  .inc-summary { grid-template-columns: 1fr 1fr; }
+}

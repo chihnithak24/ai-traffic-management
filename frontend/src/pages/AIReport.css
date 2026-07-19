@@ -1,0 +1,100 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   AIReport.css — AI Traffic Report
+   Premium charts · data cards · export actions
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Summary card strip ──────────────────────────────────────────────────── */
+.aireport-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.aireport-stat {
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xl);
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  box-shadow: var(--shadow), var(--shadow-inset);
+  transition: var(--transition-slow);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.aireport-stat::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: var(--grad-brand);
+  opacity: 0;
+  transition: opacity .3s;
+}
+.aireport-stat:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.aireport-stat:hover::before { opacity: 1; }
+
+.ars-icon  { font-size: 1.6rem; }
+.ars-value {
+  font-size: 1.55rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -.04em;
+  animation: countUp .5s cubic-bezier(.22,1,.36,1);
+}
+.ars-label {
+  font-size: .7rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  letter-spacing: .02em;
+}
+
+/* ── Grid for charts ─────────────────────────────────────────────────────── */
+.aireport-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.aireport-card {
+  animation: slideUp .4s cubic-bezier(.22,1,.36,1) both;
+}
+
+.aireport-card.span-2 { grid-column: span 2; }
+
+/* ── Insight row ─────────────────────────────────────────────────────────── */
+.insight-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 13px 16px;
+  border-radius: var(--radius-lg);
+  margin-bottom: 10px;
+  border-left: 4px solid;
+  background: var(--bg-secondary);
+  transition: var(--transition);
+  animation: slideIn .35s cubic-bezier(.22,1,.36,1) both;
+}
+.insight-row:last-child { margin-bottom: 0; }
+.insight-row:hover { transform: translateX(5px); }
+
+.insight-icon { font-size: 1.2rem; flex-shrink: 0; line-height: 1; }
+.insight-text {
+  font-size: .84rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .aireport-grid { grid-template-columns: 1fr; }
+  .aireport-card.span-2 { grid-column: span 1; }
+}
+@media (max-width: 600px) {
+  .aireport-summary { grid-template-columns: repeat(2, 1fr); }
+}

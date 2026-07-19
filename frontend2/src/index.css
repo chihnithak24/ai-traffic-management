@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes ping {
+  75%, 100% { transform: scale(2); opacity: 0; }
+}
+
+@keyframes drift {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@layer base {
+  html { font-family: 'Inter', system-ui, sans-serif; }
+  body {
+    @apply min-h-screen bg-slate-50 text-slate-900 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100;
+    background-image: radial-gradient(circle at top left, rgba(129, 140, 248, 0.14), transparent 30%), radial-gradient(circle at bottom right, rgba(236, 72, 153, 0.12), transparent 36%);
+  }
+  * { @apply border-slate-200 dark:border-slate-700; }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { @apply bg-transparent; }
+  ::-webkit-scrollbar-thumb { @apply rounded-full bg-slate-300 dark:bg-slate-600; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-slate-400 dark:bg-slate-500; }
+}
+
+@layer components {
+  .glass {
+    @apply border border-white/20 bg-white/80 shadow-[0_12px_35px_rgba(15,23,42,0.08)] backdrop-blur-md dark:border-slate-700/50 dark:bg-slate-800/80;
+  }
+  .glass-dark {
+    @apply border border-slate-700/50 bg-slate-900/80 backdrop-blur-md;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-500 bg-clip-text text-transparent;
+  }
+  .gradient-text-blue {
+    @apply bg-gradient-to-r from-sky-400 to-cyan-400 bg-clip-text text-transparent;
+  }
+
+  .gradient-bg {
+    @apply bg-gradient-to-br from-indigo-600 via-violet-600 to-blue-700;
+  }
+  .gradient-card {
+    @apply bg-gradient-to-br from-indigo-500/10 to-fuchsia-500/10 dark:from-indigo-900/30 dark:to-fuchsia-900/30;
+  }
+
+  .stat-card {
+    @apply glass rounded-[22px] p-5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl animate-fade-in;
+  }
+
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-2xl px-4 py-2 text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-gradient-to-r from-indigo-500 to-fuchsia-600 text-white shadow-md hover:from-indigo-600 hover:to-fuchsia-700 focus:ring-indigo-500 active:scale-95;
+  }
+  .btn-secondary {
+    @apply btn border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700;
+  }
+  .btn-danger {
+    @apply btn bg-rose-500 text-white shadow-md hover:bg-rose-600 focus:ring-rose-500 active:scale-95;
+  }
+  .btn-success {
+    @apply btn bg-emerald-500 text-white hover:bg-emerald-600 focus:ring-emerald-500 active:scale-95;
+  }
+  .btn-ghost {
+    @apply btn bg-transparent text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800;
+  }
+  .btn-icon {
+    @apply rounded-2xl p-2 text-slate-500 transition-colors hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800;
+  }
+
+  .input {
+    @apply w-full rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 transition-all duration-200 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100;
+  }
+
+  .badge { @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold; }
+  .badge-low { @apply badge bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400; }
+  .badge-medium { @apply badge bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400; }
+  .badge-high { @apply badge bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-400; }
+  .badge-accident { @apply badge bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-400; }
+  .badge-closed { @apply badge bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-400; }
+  .badge-emergency { @apply badge bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-400 animate-pulse; }
+
+  .table-wrap { @apply overflow-x-auto rounded-[22px]; }
+  .data-table { @apply w-full text-sm; }
+  .data-table thead { @apply border-b border-slate-100 bg-slate-50/80 dark:border-slate-800 dark:bg-slate-800/80; }
+  .data-table thead th { @apply whitespace-nowrap px-4 py-3 text-left text-[11px] font-semibold uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400; }
+  .data-table tbody tr { @apply border-b border-slate-50 transition-colors hover:bg-indigo-50/60 dark:border-slate-800 dark:hover:bg-indigo-900/10; }
+  .data-table tbody tr:last-child { @apply border-0; }
+  .data-table tbody td { @apply px-4 py-3 align-middle text-slate-700 dark:text-slate-300; }
+
+  .nav-item {
+    @apply flex cursor-pointer items-center gap-3 px-4 py-2.5 text-sm font-medium transition-all duration-200;
+  }
+  .nav-item-active {
+    @apply border border-indigo-200 bg-gradient-to-r from-indigo-500/20 to-fuchsia-500/20 text-indigo-600 dark:border-indigo-700/50 dark:text-indigo-400;
+  }
+  .nav-item-inactive {
+    @apply text-slate-300 hover:bg-white/10 hover:text-white;
+  }
+
+  .modal-overlay {
+    @apply fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm;
+  }
+  .modal {
+    @apply glass max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-[24px] shadow-2xl animate-slide-up;
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .glow-indigo { box-shadow: 0 0 24px rgba(99, 102, 241, 0.35); }
+  .glow-green { box-shadow: 0 0 24px rgba(34, 197, 94, 0.35); }
+  .glow-red { box-shadow: 0 0 24px rgba(239, 68, 68, 0.35); }
+  .glow-amber { box-shadow: 0 0 24px rgba(245, 158, 11, 0.35); }
+  .animate-float { animation: drift 6s ease-in-out infinite; }
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 12px !important;
+  box-shadow: 0 10px 40px rgba(0,0,0,.2) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  padding: 0 !important;
+  overflow: hidden;
+}
+.leaflet-popup-content { margin: 0 !important; }
+.leaflet-popup-tip-container { display: none; }
+.dark .leaflet-popup-content-wrapper { background: #1e293b !important; color: #e2e8f0 !important; }

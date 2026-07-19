@@ -1,0 +1,126 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   MapPage.css — Interactive Traffic Map
+   Premium map layout · legend bar · popup styling · heatmap
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Filter bar ──────────────────────────────────────────────────────────── */
+.map-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  align-items: center;
+}
+
+/* ── Legend bar ──────────────────────────────────────────────────────────── */
+.map-legend-bar {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xl);
+  padding: 12px 20px;
+  margin-bottom: 14px;
+  font-size: .82rem;
+  color: var(--text-secondary);
+  box-shadow: var(--shadow), var(--shadow-inset);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.legend-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 1px 4px rgba(0,0,0,.25);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.legend-count {
+  margin-left: auto;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: .8rem;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+}
+
+/* ── Map wrapper ─────────────────────────────────────────────────────────── */
+.map-wrapper {
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-md);
+}
+
+/* ── Tab bar ─────────────────────────────────────────────────────────────── */
+.map-tab-bar {
+  display: flex;
+  gap: 8px;
+}
+
+/* ── Map popup styling ───────────────────────────────────────────────────── */
+.map-popup {
+  min-width: 200px;
+  font-family: var(--font);
+  font-size: .84rem;
+}
+
+.popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: .9rem;
+  font-weight: 700;
+  color: #0f1729;
+}
+
+.popup-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.popup-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: .82rem;
+  padding: 4px 0;
+  border-bottom: 1px solid #e8edf4;
+}
+.popup-row:last-child { border-bottom: none; }
+.popup-row span { color: #506070; }
+.popup-row strong { color: #0f1729; }
+
+.popup-footer {
+  font-size: .72rem;
+  color: #8ba0b4;
+  margin-top: 6px;
+  font-family: monospace;
+}
+
+/* ── Live location ping animation ────────────────────────────────────────── */
+@keyframes ping {
+  75%, 100% { transform: scale(2); opacity: 0; }
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .map-legend-bar { gap: 10px; padding: 10px 14px; }
+  .legend-count { width: 100%; }
+  .map-tab-bar { flex-wrap: wrap; }
+}

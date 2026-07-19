@@ -1,0 +1,159 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Alerts.css — Real-Time Traffic Alerts
+   Premium glassmorphism · severity-coded cards · live indicators
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Summary stat bar ────────────────────────────────────────────────────── */
+.alerts-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.alert-stat {
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xl);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  box-shadow: var(--shadow), var(--shadow-inset);
+  transition: var(--transition-slow);
+}
+.alert-stat:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+.alert-stat-value {
+  font-size: 1.9rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.05em;
+  animation: countUp .5s cubic-bezier(.22,1,.36,1);
+}
+.alert-stat-label {
+  font-size: .72rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+/* ── Alerts list ─────────────────────────────────────────────────────────── */
+.alerts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.alert-card {
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xl);
+  padding: 18px 20px;
+  box-shadow: var(--shadow), var(--shadow-inset);
+  transition: var(--transition-slow);
+  animation: slideIn .3s cubic-bezier(.22,1,.36,1) both;
+  position: relative;
+  overflow: hidden;
+}
+.alert-card:hover { transform: translateX(4px); box-shadow: var(--shadow-md); }
+
+/* Color override for light background on severity — keep dark mode readable */
+[data-theme="dark"] .alert-card {
+  background: var(--bg-card) !important;
+}
+
+.alert-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.alert-icon { font-size: 1.6rem; flex-shrink: 0; line-height: 1; }
+
+.alert-info { flex: 1; min-width: 0; }
+.alert-area {
+  display: block;
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -.02em;
+}
+.alert-type {
+  display: block;
+  font-size: .75rem;
+  font-weight: 700;
+  margin-top: 3px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.alert-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.alert-vehicles {
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-solid);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+.alert-time {
+  font-size: .72rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+
+.alert-message {
+  margin-top: 12px;
+  font-size: .84rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+/* ── Auto-refresh toggle ─────────────────────────────────────────────────── */
+.auto-refresh-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 7px 14px;
+  background: var(--bg-glass);
+  border: 1.5px solid var(--border-solid);
+  border-radius: var(--radius-full);
+  transition: var(--transition);
+  backdrop-filter: var(--glass-blur-sm);
+  user-select: none;
+}
+.auto-refresh-toggle:hover { background: var(--accent-light); border-color: var(--accent); color: var(--accent); }
+.auto-refresh-toggle input { accent-color: var(--accent); width: 14px; height: 14px; cursor: pointer; }
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .alerts-summary { grid-template-columns: repeat(2, 1fr); }
+  .alert-meta { align-items: flex-start; }
+}
+@media (max-width: 480px) {
+  .alerts-summary { grid-template-columns: 1fr 1fr; }
+  .alert-card-header { gap: 10px; }
+}
