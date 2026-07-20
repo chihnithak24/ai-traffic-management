@@ -83,7 +83,7 @@ const calculatePrediction = (vehicleCount, congestionLevel, areaName, averageSpe
   };
 
   // Confidence based on data richness — deterministic
-  const confidenceScore = speed !== null ? 95 : 80;
+  const confidenceScore = averageSpeed !== null ? 95 : 80;
 
   return {
     estimatedCongestion,

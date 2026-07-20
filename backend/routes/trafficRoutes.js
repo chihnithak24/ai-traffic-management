@@ -18,9 +18,9 @@ const { protect } = require('../middleware/authMiddleware');
 router.use(protect);
 
 router.get('/', getAllTraffic);
-router.get('/:id', getTrafficById);
 router.post('/', createTraffic);
 router.post('/simulate', simulateTraffic);
+router.get('/:id', getTrafficById);
 router.put('/:id', updateTraffic);
 router.delete('/:id', deleteTraffic);
 router.put('/:id/emergency', toggleEmergency);
